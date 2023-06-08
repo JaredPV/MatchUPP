@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class RecuperarActivity extends AppCompatActivity {
     private ImageView iv_back2;
     private Button btn_recuperar;
@@ -33,8 +35,12 @@ public class RecuperarActivity extends AppCompatActivity {
         btn_recuperar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!et_mail2.getText().toString().endsWith("@micorreo.upp.edu.mx")){
+                    Snackbar.make(view, "Ingresa una dirección de correo válida", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
                 builder.setTitle("Recuperar contraseña")
-                        .setMessage("Si el correo "+et_mail2.getText().toString()+" es correcto y corresponde a una cuenta, se enviará un correo para recuperar su contraseña")
+                        .setMessage("Si la dirección "+et_mail2.getText().toString()+" es correcto y corresponde a una cuenta, se enviará un correo para recuperar su contraseña")
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {

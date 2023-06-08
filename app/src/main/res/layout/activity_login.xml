@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="5dp"
+        app:srcCompat="@drawable/ic_back" />
     <TextView
         android:id="@+id/tv_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         android:text="Inicia Sesión con tu correo institucional"
@@ -19,94 +29,98 @@
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <EditText
         android:id="@+id/et_mail"
-        android:layout_width="256dp"
+        android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:layout_marginTop="100dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="40dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/morado"
+        android:backgroundTint="@color/gris"
         android:drawableLeft="@drawable/ic_mail"
         android:drawablePadding="5dp"
-        android:ems="10"
         android:hint="Correo Institucional"
+        android:maxLines="1"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
-        android:textColorHint="#989898"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_titulo" />
+        android:textColorHint="@color/white_clear"
+        android:textSize="15sp"
+        />
 
     <EditText
         android:id="@+id/et_pass"
-        android:layout_width="256dp"
+        android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:background="@android:drawable/editbox_background"
-        android:backgroundTint="@color/rosa"
+        android:backgroundTint="@color/gris"
         android:drawableStart="@drawable/ic_key"
         android:drawablePadding="5dp"
-        android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:textColor="@color/white"
-        android:textColorHint="#989898"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_mail" />
+        android:textColorHint="@color/white_clear"
+        android:textSize="15sp"
+        android:maxLines="1"
+       />
+    <TextView
+        android:id="@+id/tv_olvide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/olvidar"
+        android:textColor="@color/white"
+        android:textStyle="bold|italic"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        />
 
     <Button
         android:id="@+id/btn_iniciar"
-        android:layout_width="256dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/morado"
+        android:backgroundTint="@color/rosa"
         android:text="Iniciar Sesión"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_pass" />
 
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back" />
+
 
     <Button
         android:id="@+id/btn_registrarme"
-        android:layout_width="256dp"
-        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_marginTop="28dp"
-        android:backgroundTint="#2196F3"
+        android:backgroundTint="@color/azul"
         android:text="Registrarme"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_iniciar" />
 
-    <TextView
-        android:id="@+id/tv_olvide"
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Olvidé mi contraseña"
-        android:textColor="#00BCD4"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

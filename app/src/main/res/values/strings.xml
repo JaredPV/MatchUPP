@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MatchUpp</string>
+    <string name="olvidar"><u>Olvidé mi contraseña</u></string>
 </resources>

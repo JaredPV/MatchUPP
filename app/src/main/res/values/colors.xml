@@ -2,7 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#0C1845</color>
-    <color name="morado">#AF15E5</color>
-    <color name="rosa">#FF2EDE</color>
+    <color name="white_clear">#E4FFFFFF</color>
+    <color name="background">#FFBDBE</color>
+    <color name="azul">#00D5C3</color>
+    <color name="rosa">#FF9495</color>
+    <color name="gris">#D5BEB9</color>
 </resources>
