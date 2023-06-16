@@ -2,6 +2,9 @@ package com.example.matchupp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -203,11 +206,27 @@ public class MenuActivity extends AppCompatActivity {
                     menuAnimation.playAnimation();
 
                     selectedTab=4;
+                    cerrarSesion();
+
+
 
                 }
 
             }
         });
 
+    }
+    private void cerrarSesion() {
+
+        // Limpiar preferencias
+        SharedPreferences preferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.apply();
+
+        // Lanzar la actividad de inicio de sesión
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

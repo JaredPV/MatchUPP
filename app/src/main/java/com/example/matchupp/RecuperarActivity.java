@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.example.matchupp.Registro.Endpoints;
+import com.example.matchupp.Registro.VolleySingleton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class RecuperarActivity extends AppCompatActivity {
@@ -44,14 +48,31 @@ public class RecuperarActivity extends AppCompatActivity {
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent in = new Intent(RecuperarActivity.this, LoginActivity.class);
-                                startActivity(in);
+                                recuperarPass(et_mail2.getText().toString());
+                                //Intent in = new Intent(RecuperarActivity.this, LoginActivity.class);
+                                //startActivity(in);
                             }
                         })
                         .show();
 
             }
+
         });
 
+    }
+    private void recuperarPass(String email){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.recuperar_url, response -> {
+            Snackbar.make(findViewById(android.R.id.content), response, Snackbar.LENGTH_SHORT).show();
+        }, error -> {
+            Snackbar.make(findViewById(android.R.id.content), "No se ha podido conectar", Snackbar.LENGTH_SHORT).show();
+        }){
+            @Override
+            protected java.util.Map<String, String> getParams() {
+                java.util.Map<String, String> params = new java.util.HashMap<>();
+                params.put("email", email);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 }

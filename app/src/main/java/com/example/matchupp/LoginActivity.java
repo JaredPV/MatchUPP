@@ -1,11 +1,15 @@
 package com.example.matchupp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,7 +20,14 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.example.matchupp.Registro.Endpoints;
 import com.example.matchupp.Registro.Register;
+import com.example.matchupp.Registro.VolleySingleton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -33,49 +44,47 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.ktx.Firebase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginActivity extends AppCompatActivity {
 
-    private ImageView iv_back;
+    private ImageView iv_back, iv_passIcon;
     private TextView tv_recuperar;
-    private Button btn_iniciar;
-    Button btn_registrar;
-
-    private static final String TAG = "GoogleActivity";
-    private static final int RC_SIGN_IN = 9001;
-
-    // [START declare_auth]
-    private FirebaseAuth mAuth;
-    // [END declare_auth]
-
-    private GoogleSignInClient mGoogleSignInClient;
+    private Button btn_iniciar, btn_registrar;
+    private EditText et_correo, et_pass;
+    private String email, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        // [END config_signin]
-
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
-
+        et_correo = findViewById(R.id.et_mail);
+        et_pass = findViewById(R.id.et_pass);
+        iv_passIcon = findViewById(R.id.passwordIcon);
         iv_back = findViewById(R.id.iv_back);
         tv_recuperar = findViewById(R.id.tv_olvide);
         btn_registrar = findViewById(R.id.btn_registrarme);
         btn_iniciar = findViewById(R.id.btn_iniciar);
+        recuperarUsuario();
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
+            }
+        });
+
+        iv_passIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et_pass.getInputType() == 129) {
+                    et_pass.setInputType(1);
+                    iv_passIcon.setImageResource(R.drawable.eye_open);
+                } else {
+                    et_pass.setInputType(129);
+                    iv_passIcon.setImageResource(R.drawable.eye_closed);
+                }
             }
         });
         tv_recuperar.setOnClickListener(new View.OnClickListener() {
@@ -92,75 +101,70 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
+        btn_iniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et_correo.getText().toString().isEmpty() || et_pass.getText().toString().isEmpty()) {
+                    Snackbar.make(v, "Ingresa todos los campos", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!et_correo.getText().toString().endsWith("@micorreo.upp.edu.mx")) {
+                    Snackbar.make(v, "Ingresa una dirección de correo válida", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+                signIn(et_correo.getText().toString(), et_pass.getText().toString());
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
-                firebaseAuthWithGoogle(account.getIdToken());
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e);
             }
-        }
+        });
     }
+    private void signIn(String email, String password){
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.login_url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (!response.isEmpty()) {
+                    guardarUsuario();
+                    Intent i = new Intent(LoginActivity.this, MenuActivity.class);
+                    i.putExtra("user", response);
+                    startActivity(i);
+                }else{
+                    new AlertDialog.Builder(LoginActivity.this)
+                            .setTitle("Error")
+                            .setMessage(response)
+                            .setPositiveButton("Aceptar", null)
+                            .show();
+                    //Snackbar.make(btn_iniciar, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show();
+                }
 
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            updateUI(null);
-                        }
-                    }
-                });
-    }
-
-    private void updateUI(FirebaseUser user) {
-        user = mAuth.getCurrentUser();
-        if(user!= null) {
-            Snackbar.make(findViewById(android.R.id.content), "no nulo", Snackbar.LENGTH_LONG).show();
-            if(user.getEmail().endsWith("@micorreo.upp.edu.mx")) {
-                Intent i = new Intent(LoginActivity.this, Register.class);
-                i.putExtra("user", user.getEmail());
-                startActivity(i);
-                finish();
-            } else {
-                Snackbar.make(findViewById(android.R.id.content), "No es un correo de la UPP", Snackbar.LENGTH_LONG).show();
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Snackbar.make(btn_iniciar, "Error de conexión", Snackbar.LENGTH_SHORT).show();
+                 Log.d("VOLLEY", error.getMessage());
+            }
+        }){
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("email", email);
+                params.put("pass", password);
+                return params;
+            }
+        };
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+    }
+    private void guardarUsuario() {
+        SharedPreferences preferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("email", email);
+        editor.putString("pass", pass);
+        editor.putBoolean("sesion", true);
 
-        }
-        Snackbar.make(findViewById(android.R.id.content), "nulo", Snackbar.LENGTH_LONG).show();
 
+        editor.apply();
     }
 
+    private void recuperarUsuario(){
+        SharedPreferences preferences=getSharedPreferences("preferenciasLogin",Context.MODE_PRIVATE);
+
+    }
 }
