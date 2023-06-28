@@ -1,220 +1,195 @@
 package com.example.matchupp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.matchupp.Herramientas.HerramientasActivity;
+import com.example.matchupp.Registro.PerfilFragment;
+import com.google.android.material.navigation.NavigationView;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private int selectedTab=1;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
+    private LinearLayout heartLayout, chatsLayout, profileLayout;
+    private LottieAnimationView heartAnimation, chatsAnimation, profileAnimation;
+    private TextView heartTxt, chatTxt, profileTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         //Enlace de cada uno de los LinearLayouts necesarios
-        final LinearLayout heartLayout = findViewById(R.id.heartLayout);
-        final LinearLayout listaLayout = findViewById(R.id.listaLayout);
-        final LinearLayout menuLayout = findViewById(R.id.menuLayout);
-        final LinearLayout chatLayout=findViewById(R.id.chatLayout);
+        heartLayout = findViewById(R.id.heartLayout);
+        chatsLayout = findViewById(R.id.chatsLayout);
+        profileLayout =findViewById(R.id.profileLayout);
 
         //Enlace de cada uno de las vistas de Lottie
-        final LottieAnimationView heartAnimation=findViewById(R.id.heartAnimation);
-        final LottieAnimationView listaAnimation=findViewById(R.id.listaAnimation);
-        final LottieAnimationView menuAnimation=findViewById(R.id.menuAnimation);
-        final LottieAnimationView chatAnimation=findViewById(R.id.chatAnimation);
+        heartAnimation=findViewById(R.id.heartAnimation);
+        chatsAnimation=findViewById(R.id.chatsAnimation);
+        profileAnimation=findViewById(R.id.profileAnimation);
 
         //Enlace de cada uno de los campos de texto del menú
-        final TextView heartTxt=findViewById(R.id.heartTxt);
-        final TextView listaTxt=findViewById(R.id.listaTxt);
-        final TextView menuTxt=findViewById(R.id.menuTxt);
-        final TextView chatTxt=findViewById(R.id.chatTxt);
+        heartTxt=findViewById(R.id.heartTxt);
+        chatTxt=findViewById(R.id.chatsTxt);
+        profileTxt=findViewById(R.id.profileTxt);
 
+        heartLayout.setBackgroundResource(R.drawable.menu);
+        heartTxt.setVisibility(View.VISIBLE);
+        heartAnimation.playAnimation();
 
-
-        listaLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(selectedTab!=1){
-
-                    //Se colocan invisibles los textos
-                    heartTxt.setVisibility(View.GONE);
-
-                    menuTxt.setVisibility(View.GONE);
-                    chatTxt.setVisibility(View.GONE);
-
-                    //Se cancelan las animaciones
-                    heartAnimation.cancelAnimation();
-
-                    menuAnimation.cancelAnimation();
-                    chatAnimation.cancelAnimation();
-
-                    //Se quitan los fondos de cada uno de los linear layout
-                    heartLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-
-                    menuLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    chatLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-
-
-                    //Se destaca el elemento seleccionado
-                    listaLayout.setBackgroundResource(R.drawable.menu);
-                    listaTxt.setVisibility(View.VISIBLE);
-                    ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1.f,1f, Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f);
-                    scaleAnimation.setDuration(200);
-                    scaleAnimation.setFillAfter(true);
-                    listaLayout.startAnimation(scaleAnimation);
-                    listaAnimation.playAnimation();
-
-                    selectedTab=1;
-
-                }
-
-            }
-        });
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new HomeFragment()).commit();
 
         heartLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(selectedTab!=2){
-
-                    //Se colocan invisibles los textos
-                    menuTxt.setVisibility(View.GONE);
-                    chatTxt.setVisibility(View.GONE);
-                    listaTxt.setVisibility(View.GONE);
-
-
-                    //Se cancelan las animaciones
-                    menuAnimation.cancelAnimation();
-                    chatAnimation.cancelAnimation();
-                    listaAnimation.cancelAnimation();
-
-
-                    //Se quitan los fondos de cada uno de los linear layout
-                    menuLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    chatLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    listaLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-
-
-
-                    //Se destaca el elemento seleccionado
-                    heartLayout.setBackgroundResource(R.drawable.menu);
-                    heartTxt.setVisibility(View.VISIBLE);
-                    ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1.f,1f, Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f);
-                    scaleAnimation.setDuration(200);
-                    scaleAnimation.setFillAfter(true);
-                    heartLayout.startAnimation(scaleAnimation);
-                    heartAnimation.playAnimation();
-
-                    selectedTab=2;
-
-                }
-
+                onHeartClick();
             }
         });
 
-        chatLayout.setOnClickListener(new View.OnClickListener() {
+        chatsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-                if(selectedTab!=3){
-
-
-
-                    //Se colocan invisibles los textos
-                    menuTxt.setVisibility(View.GONE);
-                    listaTxt.setVisibility(View.GONE);
-                    heartTxt.setVisibility(View.GONE);
-
-
-                    //Se cancelan las animaciones
-                    menuAnimation.cancelAnimation();
-                    listaAnimation.cancelAnimation();
-                    heartAnimation.cancelAnimation();
-
-
-                    //Se quitan los fondos de cada uno de los linear layout
-                    menuLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    listaLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    heartLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-
-
-
-                    //Se destaca el elemento seleccionado
-                    chatLayout.setBackgroundResource(R.drawable.menu);
-                    chatTxt.setVisibility(View.VISIBLE);
-                    ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1.f,1f, Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f);
-                    scaleAnimation.setDuration(200);
-                    scaleAnimation.setFillAfter(true);
-                    chatLayout.startAnimation(scaleAnimation);
-                    chatAnimation.playAnimation();
-
-                    selectedTab=3;
-
-                }
-
+                onChatsClick();
             }
         });
 
-        menuLayout.setOnClickListener(new View.OnClickListener() {
+        profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(selectedTab!=4){
-
-
-
-                    //Se colocan invisibles los textos
-                    chatTxt.setVisibility(View.GONE);
-                    heartTxt.setVisibility(View.GONE);
-                    listaTxt.setVisibility(View.GONE);
-
-
-                    //Se cancelan las animaciones
-                    chatAnimation.cancelAnimation();
-                    heartAnimation.cancelAnimation();
-                    listaAnimation.cancelAnimation();
-
-
-                    //Se quitan los fondos de cada uno de los linear layout
-                    chatLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    heartLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    listaAnimation.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-
-
-
-                    //Se destaca el elemento seleccionado
-                    menuLayout.setBackgroundResource(R.drawable.menu);
-                    menuTxt.setVisibility(View.VISIBLE);
-                    ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1.f,1f, Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f);
-                    scaleAnimation.setDuration(200);
-                    scaleAnimation.setFillAfter(true);
-                    menuLayout.startAnimation(scaleAnimation);
-                    menuAnimation.playAnimation();
-
-                    selectedTab=4;
-                    cerrarSesion();
-
-
-
-                }
-
+                onProfileClick();
             }
         });
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView=findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar, R.string.tool_open,R.string.tool_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        if(savedInstanceState==null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new HomeFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_principal);
+        }
+
+    }
+    public void onHeartClick(){
+        if(selectedTab!=1){
+
+            //Se colocan invisibles los textos
+            chatTxt.setVisibility(View.GONE);
+            profileTxt.setVisibility(View.GONE);
+
+
+            //Se cancelan las animaciones
+            chatsAnimation.cancelAnimation();
+            profileAnimation.cancelAnimation();
+
+
+            //Se quitan los fondos de cada uno de los linear layout
+            profileLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            chatsLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+
+
+            //Se destaca el elemento seleccionado
+            heartLayout.setBackgroundResource(R.drawable.menu);
+            heartTxt.setVisibility(View.VISIBLE);
+            ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1.f,1f, Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f);
+            scaleAnimation.setDuration(200);
+            scaleAnimation.setFillAfter(true);
+            heartLayout.startAnimation(scaleAnimation);
+            heartAnimation.playAnimation();
+            selectedTab=1;
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new HomeFragment()).commit();
+
+        }
+    }
+
+    private void onChatsClick() {
+        if(selectedTab!=2){
+
+            //Se colocan invisibles los textos
+            heartTxt.setVisibility(View.GONE);
+            profileTxt.setVisibility(View.GONE);
+
+            //Se cancelan las animaciones
+            heartAnimation.cancelAnimation();
+
+            profileAnimation.cancelAnimation();
+
+            //Se quitan los fondos de cada uno de los linear layout
+            heartLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            profileLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+
+            //Se destaca el elemento seleccionado
+            chatsLayout.setBackgroundResource(R.drawable.menu);
+            chatTxt.setVisibility(View.VISIBLE);
+            ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1.f,1f, Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f);
+            scaleAnimation.setDuration(200);
+            scaleAnimation.setFillAfter(true);
+            chatsLayout.startAnimation(scaleAnimation);
+            chatsAnimation.playAnimation();
+            selectedTab=2;
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new ChatsFragment()).commit();
+        }
+    }
+
+    private void onProfileClick() {
+        if(selectedTab!=3){
+            //Se colocan invisibles los textos
+            chatTxt.setVisibility(View.GONE);
+            heartTxt.setVisibility(View.GONE);
+
+            //Se cancelan las animaciones
+            chatsAnimation.cancelAnimation();
+            heartAnimation.cancelAnimation();
+
+
+            //Se quitan los fondos de cada uno de los linear layout
+            chatsLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            heartLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+
+
+            //Se destaca el elemento seleccionado
+            profileLayout.setBackgroundResource(R.drawable.menu);
+            profileTxt.setVisibility(View.VISIBLE);
+            ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1.f,1f, Animation.RELATIVE_TO_SELF,0.0f,Animation.RELATIVE_TO_SELF,0.0f);
+            scaleAnimation.setDuration(200);
+            scaleAnimation.setFillAfter(true);
+            profileLayout.startAnimation(scaleAnimation);
+            profileAnimation.playAnimation();
+
+            selectedTab=3;
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new PerfilFragment()).commit();
+        }
     }
     private void cerrarSesion() {
 
@@ -229,4 +204,31 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.nav_principal:
+                onHeartClick();
+                break;
+            case R.id.nav_chat:
+                onChatsClick();
+                break;
+            case R.id.nav_perfil:
+                onProfileClick();
+                break;
+            case R.id.nav_herramientas:
+                Intent intent = new Intent(this, HerramientasActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.nav_logout:
+                cerrarSesion();
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 }

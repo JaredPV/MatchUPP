@@ -5,7 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    tools:context=".MenuActivity">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        tools:context=".MenuActivity"
+        tools:openDrawer="start">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:elevation="4dp"
+                android:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+                android:tint="@color/rosa"
+                app:titleTextColor="@color/white"
+
+                />
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start" />
+
+        </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/background"
+            app:itemIconTint="@color/white"
+            app:headerLayout="@layout/drawer_header"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/drawer_menu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -18,14 +67,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="4"
+        android:weightSum="3"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:elevation="10dp"
         android:gravity="center"
-        android:background="#FCBCBC"
+        android:background="@color/background"
         android:layout_alignParentBottom="true">
 
         <LinearLayout
@@ -50,16 +99,17 @@
                 android:id="@+id/heartTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Inicio"
                 android:textStyle="bold"
-                android:textColor="#110115"
+                android:textColor="@color/white"
                 android:layout_marginStart="10dp"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:visibility="gone"
+                />
 
         </LinearLayout>
-
-
         <LinearLayout
-            android:id="@+id/listaLayout"
+            android:id="@+id/chatsLayout"
             android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -70,25 +120,28 @@
             android:layout_weight="1">
 
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/listaAnimation"
+                android:id="@+id/chatsAnimation"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:lottie_rawRes="@raw/lista"
+                app:lottie_rawRes="@raw/message2"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"/>
 
             <TextView
-                android:id="@+id/listaTxt"
+                android:id="@+id/chatsTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textColor="#170343"
+                android:text="Chats"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"
+                />
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/chatLayout"
+            android:id="@+id/profileLayout"
             android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -99,54 +152,28 @@
             android:layout_weight="1">
 
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/chatAnimation"
+                android:id="@+id/profileAnimation"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:lottie_rawRes="@raw/message4"
+                app:lottie_rawRes="@raw/profile"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"/>
 
 
             <TextView
-                android:id="@+id/chatTxt"
+                android:id="@+id/profileTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_marginStart="10dp"
-                android:textColor="#110115"
+                android:text="Perfil"
+                android:textColor="@color/white"
                 android:textSize="16sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/menuLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:gravity="center"
-            android:layout_weight="1">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/menuAnimation"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:lottie_rawRes="@raw/menu"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"/>
-
-
-            <TextView
-                android:id="@+id/menuTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="#110115"
-                android:layout_marginStart="10dp"
-                android:textSize="16sp"/>
+                android:visibility="gone"
+                />
 
         </LinearLayout>
+
 
     </LinearLayout>
 

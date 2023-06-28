@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">MatchUpp</string>
     <string name="olvidar"><u>Olvidé mi contraseña</u></string>
+    <string name="tool_open">Open</string>
+    <string name="tool_close">Close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

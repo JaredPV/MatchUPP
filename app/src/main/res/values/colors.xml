@@ -7,4 +7,6 @@
     <color name="azul">#00D5C3</color>
     <color name="rosa">#FF9495</color>
     <color name="gris">#D5BEB9</color>
+    <color name="blue">#3949AB</color>
+    <color name="red">#E53935</color>
 </resources>

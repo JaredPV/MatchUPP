@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Herramientas.HerramientasActivity"
+>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_regresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Volver"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/rosa"/>
+
+    <FrameLayout
+        android:id="@+id/frameLayoutTools"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/tools_bottom"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <LinearLayout
+        android:id="@+id/tools_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="5dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="5dp"
+        android:weightSum="3"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:id="@+id/calculatorLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/calculatorAnimation"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:lottie_rawRes="@raw/calculator"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"/>
+
+            <TextView
+                android:id="@+id/calculatorTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Calculadora"
+                android:textColor="@color/white"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tasksLayout"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/tasksAnimation"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:lottie_rawRes="@raw/tasks"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"/>
+
+            <TextView
+                android:id="@+id/tasksTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Tareas"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/converterLayout"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/converterAnimation"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:lottie_rawRes="@raw/converter"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"/>
+
+
+            <TextView
+                android:id="@+id/converterTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Convert"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="208dp"
+        android:background="@color/background"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/IvfotoPerfil_drawer"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="start"
+            android:scaleType="centerCrop"
+            android:src="@drawable/matchupp" />
+
+        <TextView
+            android:id="@+id/tvUsuario_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perfil Matchupp"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvcorreoUsurio_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="ejemplo@micorreo.upp.edu.mx"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
