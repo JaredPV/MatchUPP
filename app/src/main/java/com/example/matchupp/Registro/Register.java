@@ -86,7 +86,7 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validaciones()) {
-                    registrar_usuario(et_nombre.getText().toString(), et_apellido.getText().toString(),et_apodo.getText().toString(), et_correo.getText().toString(), et_pass.getText().toString(), new Timestamp(System.currentTimeMillis()).toString());
+                    registrar_usuario(et_nombre.getText().toString(), et_apellido.getText().toString(),et_apodo.getText().toString(), et_correo.getText().toString(), et_pass.getText().toString());
                 }
             }
         });
@@ -127,9 +127,9 @@ public class Register extends AppCompatActivity {
             return true;
         }
     }
-    private void registrar_usuario(final String nombre, final String apellido, final String apodo, final String correo, final String pass, final String created) {
+    private void registrar_usuario(final String nombre, final String apellido, final String apodo, final String correo, final String pass) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.register_url, response -> {
-            if(response.equals("Success")){
+            if(response.equals("Conexion exitosaSuccess")){
                 startActivity(new Intent(Register.this, LoginActivity.class));
             }else {
                 new AlertDialog.Builder(Register.this)
@@ -149,7 +149,6 @@ public class Register extends AppCompatActivity {
                 params.put("nickname", apodo);
                 params.put("email", correo);
                 params.put("pass", pass);
-                params.put("created", created);
                 return params;
             }
 
