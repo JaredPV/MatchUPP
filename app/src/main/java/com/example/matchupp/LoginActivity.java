@@ -44,6 +44,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.ktx.Firebase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -117,34 +120,40 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private void signIn(String email, String password){
+    private void signIn(String email, String password) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.login_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (!response.isEmpty()) {
-                    guardarUsuario();
-                    Intent i = new Intent(LoginActivity.this, MenuActivity.class);
-                    i.putExtra("user", response);
-                    startActivity(i);
-                }else{
-                    new AlertDialog.Builder(LoginActivity.this)
-                            .setTitle("Error")
-                            .setMessage(response)
-                            .setPositiveButton("Aceptar", null)
-                            .show();
-                    //Snackbar.make(btn_iniciar, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.optBoolean("success");
+                    if (success) {
+                        guardarUsuario(jsonObject);
+                        Intent i = new Intent(LoginActivity.this, MenuActivity.class);
+                        startActivity(i);
+                    } else {
+                        String errorMessage = "Usuario o contraseña incorrectos";
+                        new AlertDialog.Builder(LoginActivity.this)
+                                .setTitle("Error")
+                                .setMessage(errorMessage)
+                                .setPositiveButton("Aceptar", null)
+                                .show();
+                        //Snackbar.make(btn_iniciar, "Usuario o contraseña incorrectos", Snackbar.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Snackbar.make(btn_iniciar, "Error de formato JSON en la respuesta", Snackbar.LENGTH_SHORT).show();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Snackbar.make(btn_iniciar, "Error de conexión", Snackbar.LENGTH_SHORT).show();
-                 Log.d("VOLLEY", error.getMessage());
+                Log.d("VOLLEY", error.getMessage());
             }
-        }){
-            protected Map<String,String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
+        }) {
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
                 params.put("email", email);
                 params.put("pass", password);
                 return params;
@@ -152,19 +161,26 @@ public class LoginActivity extends AppCompatActivity {
         };
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
-    private void guardarUsuario() {
+
+    private void guardarUsuario(JSONObject jsonObject) {
         SharedPreferences preferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("email", email);
-        editor.putString("pass", pass);
-        editor.putBoolean("sesion", true);
-
-
+        editor.putInt("id", Integer.parseInt(jsonObject.optString("id")));
+        editor.putString("first_name", jsonObject.optString("first_name"));
+        editor.putString("last_name", jsonObject.optString("last_name"));
+        editor.putString("nickname", jsonObject.optString("nickname"));
+        editor.putString("email", jsonObject.optString("email"));
+        editor.putString("pass", jsonObject.optString("pass"));
+        editor.putBoolean("sesion", jsonObject.optBoolean("success"));
         editor.apply();
     }
 
     private void recuperarUsuario(){
         SharedPreferences preferences=getSharedPreferences("preferenciasLogin",Context.MODE_PRIVATE);
+        if(preferences.getBoolean("sesion",false)){
+            Intent i = new Intent(LoginActivity.this, MenuActivity.class);
+            startActivity(i);
+        }
 
     }
 }

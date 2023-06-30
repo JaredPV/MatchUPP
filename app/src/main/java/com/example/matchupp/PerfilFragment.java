@@ -1,5 +1,7 @@
-package com.example.matchupp.Registro;
+package com.example.matchupp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +9,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.matchupp.R;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +21,9 @@ public class PerfilFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private TextView profile_name, profile_lastname, profile_nickname, profile_email;
+    private ImageView profile_photo;
+    private SharedPreferences sharedPreferences;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -51,6 +56,7 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedPreferences = getActivity().getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -61,6 +67,19 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        View view = inflater.inflate(R.layout.fragment_perfil, container, false);
+        profile_name = view.findViewById(R.id.profile_name);
+        profile_lastname = view.findViewById(R.id.profile_lastname);
+        profile_nickname = view.findViewById(R.id.profile_nickname);
+        profile_email = view.findViewById(R.id.profile_email);
+        profile_photo = view.findViewById(R.id.profile_photo);
+
+        profile_name.setText(sharedPreferences.getString("first_name", ""));
+        profile_lastname.setText(sharedPreferences.getString("last_name",""));
+        profile_nickname.setText(sharedPreferences.getString("nickname",""));
+        profile_email.setText(sharedPreferences.getString("email",""));
+
+
+        return view;
     }
 }

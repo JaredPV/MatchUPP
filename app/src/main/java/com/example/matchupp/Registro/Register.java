@@ -129,7 +129,7 @@ public class Register extends AppCompatActivity {
     }
     private void registrar_usuario(final String nombre, final String apellido, final String apodo, final String correo, final String pass) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Endpoints.register_url, response -> {
-            if(response.equals("Conexion exitosaSuccess")){
+            if(response.equals("Success")){
                 startActivity(new Intent(Register.this, LoginActivity.class));
             }else {
                 new AlertDialog.Builder(Register.this)

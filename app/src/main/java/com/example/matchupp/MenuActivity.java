@@ -14,13 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.matchupp.Herramientas.HerramientasActivity;
-import com.example.matchupp.Registro.PerfilFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,11 +32,14 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private LinearLayout heartLayout, chatsLayout, profileLayout;
     private LottieAnimationView heartAnimation, chatsAnimation, profileAnimation;
     private TextView heartTxt, chatTxt, profileTxt;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        sharedPreferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
+
         //Enlace de cada uno de los LinearLayouts necesarios
         heartLayout = findViewById(R.id.heartLayout);
         chatsLayout = findViewById(R.id.chatsLayout);
@@ -84,6 +87,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        updateDrawer();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar, R.string.tool_open,R.string.tool_close);
         drawerLayout.addDrawerListener(toggle);
@@ -93,6 +97,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new HomeFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_principal);
         }
+
 
     }
     public void onHeartClick(){
@@ -229,6 +234,19 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void updateDrawer(){
+        String first_name = sharedPreferences.getString("first_name", "Perfil");
+        String last_name = sharedPreferences.getString("last_name", "MatchUPP");
+        String email = sharedPreferences.getString("email", "ejemplo@micorreo.upp.edu.mx");
+        View updateDrawer = navigationView.getHeaderView(0);
+        TextView nombre = updateDrawer.findViewById(R.id.tvUsuario_drawer);
+        TextView correo = updateDrawer.findViewById(R.id.tvcorreoUsurio_drawer);
+        ImageView foto = updateDrawer.findViewById(R.id.IvfotoPerfil_drawer);
+
+        nombre.setText(first_name + " " + last_name);
+        correo.setText(email);
     }
 
 }
