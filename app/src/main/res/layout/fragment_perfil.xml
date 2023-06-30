@@ -17,55 +17,152 @@
             android:elevation="12dp"
             app:cardCornerRadius="150dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp">
+            android:layout_marginTop="40dp">
 
-            <ImageView
-                android:id="@+id/profile_photo"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/default_profile_image" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/profile_photo"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/default_profile_image"
+                    android:scaleType="fitXY"
+                    />
+                <ImageView
+                    android:id="@+id/edit_profile_photo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_edit" />
+            </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
         <TextView
-            android:id="@+id/profile_name"
+            android:id="@+id/title_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/card_profile_image"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:textColor="@color/gris"
+            android:layout_marginTop="25dp"
             android:layout_centerHorizontal="true"
-            android:text="John" />
-
+            android:text="Nombre" />
+        <RelativeLayout
+            android:id="@+id/profile_name_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_name"
+            android:layout_centerHorizontal="true"
+            >
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_centerHorizontal="true"
+                android:text="John" />
+            <ImageView
+                android:id="@+id/edit_name"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/profile_name"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="18dp"
+                android:contentDescription="Edit" />
+        </RelativeLayout>
         <TextView
-            android:id="@+id/profile_lastname"
+            android:id="@+id/title_lastname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_name"
+            android:layout_below="@id/profile_name_layout"
             android:textSize="18sp"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="8dp"
+            android:textColor="@color/gris"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:text="Doe" />
-
+            android:text="Apellidos" />
+        <RelativeLayout
+            android:id="@+id/profile_lastname_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_lastname"
+            android:layout_centerHorizontal="true"
+            >
+            <TextView
+                android:id="@+id/profile_lastname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:textColor="@android:color/black"
+                android:layout_centerHorizontal="true"
+                android:text="Doe" />
+            <ImageView
+                android:id="@+id/edit_lastname"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="18dp"
+                android:contentDescription="Edit"
+                android:layout_toEndOf="@id/profile_lastname"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/title_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_lastname_layout"
+            android:textSize="18sp"
+            android:textColor="@color/gris"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="Apodo" />
+        <RelativeLayout
+            android:id="@+id/profile_nickname_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_nickname"
+            android:layout_centerHorizontal="true"
+            >
         <TextView
             android:id="@+id/profile_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_lastname"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="8dp"
             android:layout_centerHorizontal="true"
             android:text="johnd" />
-
+            <ImageView
+                android:id="@+id/edit_nickname"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/profile_nickname"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="18dp"
+                android:contentDescription="Edit" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/title_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_nickname_layout"
+            android:textSize="18sp"
+            android:textColor="@color/gris"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="Email" />
         <LinearLayout
             android:id="@+id/profile_email_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_nickname"
-            android:layout_marginTop="16dp"
+            android:layout_below="@id/title_email"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal">
 
@@ -73,43 +170,48 @@
                 android:id="@+id/profile_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 android:textColor="@android:color/black"
                 android:text="john.doe@example.com" />
-
-            <ImageView
-                android:id="@+id/edit_email"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_edit"
-                android:layout_marginStart="8dp"
-                android:contentDescription="Edit Email" />
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/profile_password_layout"
+        <TextView
+            android:id="@+id/title_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/profile_email_layout"
-            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            android:textColor="@color/gris"
+            android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:orientation="horizontal">
+            android:text="Contraseña" />
+
+        <RelativeLayout
+            android:id="@+id/profile_password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_password"
+            android:layout_centerHorizontal="true"
+            >
 
             <TextView
                 android:id="@+id/profile_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="20sp"
+                android:paddingTop="4dp"
+                android:layout_centerHorizontal="true"
                 android:textColor="@android:color/black"
-                android:text="********" />
+                android:text="************" />
 
             <ImageView
                 android:id="@+id/edit_password"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/profile_password"
                 android:src="@drawable/ic_edit"
-                android:layout_marginStart="8dp"
-                android:contentDescription="Edit Password" />
-        </LinearLayout>
+                android:layout_marginStart="18dp"
+                android:contentDescription="Edit" />
+        </RelativeLayout>
     </RelativeLayout>
 </ScrollView>
