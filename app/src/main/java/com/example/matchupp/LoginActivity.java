@@ -165,12 +165,16 @@ public class LoginActivity extends AppCompatActivity {
     private void guardarUsuario(JSONObject jsonObject) {
         SharedPreferences preferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("id", Integer.parseInt(jsonObject.optString("id")));
+        editor.putString("id", jsonObject.optString("id"));
         editor.putString("first_name", jsonObject.optString("first_name"));
         editor.putString("last_name", jsonObject.optString("last_name"));
         editor.putString("nickname", jsonObject.optString("nickname"));
         editor.putString("email", jsonObject.optString("email"));
         editor.putString("pass", jsonObject.optString("pass"));
+        editor.putString("gender_id", jsonObject.optString("gender_id"));
+        editor.putString("details", jsonObject.optString("details"));
+        editor.putString("birthday", jsonObject.optString("birthday"));
+        editor.putString("photo", jsonObject.optString("photo"));
         editor.putBoolean("sesion", jsonObject.optBoolean("success"));
         editor.apply();
     }

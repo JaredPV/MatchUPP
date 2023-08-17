@@ -20,15 +20,19 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.matchupp.Herramientas.HerramientasActivity;
+import com.example.matchupp.More.MoreActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private int selectedTab=1;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
+    private  String profileImageUrl;
     private LinearLayout heartLayout, chatsLayout, profileLayout;
     private LottieAnimationView heartAnimation, chatsAnimation, profileAnimation;
     private TextView heartTxt, chatTxt, profileTxt;
@@ -39,6 +43,14 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         sharedPreferences = getSharedPreferences("preferenciasLogin", Context.MODE_PRIVATE);
+        if (sharedPreferences.getString("gender_id", "")=="" ||
+                sharedPreferences.getString("gender_id","").equals("null"))
+        {
+            Intent i = new Intent(this, MoreActivity.class);
+            startActivity(i);
+            finish();
+        }
+
 
         //Enlace de cada uno de los LinearLayouts necesarios
         heartLayout = findViewById(R.id.heartLayout);
@@ -243,7 +255,16 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         View updateDrawer = navigationView.getHeaderView(0);
         TextView nombre = updateDrawer.findViewById(R.id.tvUsuario_drawer);
         TextView correo = updateDrawer.findViewById(R.id.tvcorreoUsurio_drawer);
-        ImageView foto = updateDrawer.findViewById(R.id.IvfotoPerfil_drawer);
+        ImageView foto = updateDrawer.findViewById(R.id.profile_photo_drawer);
+
+        profileImageUrl = sharedPreferences.getString("photo", null);
+        if(profileImageUrl != null){
+            Glide.with(this)
+                    .load(profileImageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .into(foto);
+        }
 
         nombre.setText(first_name + " " + last_name);
         correo.setText(email);

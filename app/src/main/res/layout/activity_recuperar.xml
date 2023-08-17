@@ -1,81 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:gravity="top"
-    android:orientation="vertical"
-    tools:context=".RecuperarActivity">
+    android:background="@color/background">
 
-    <ImageView
-        android:id="@+id/iv_back2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        app:srcCompat="@drawable/ic_back" />
-
-    <TextView
-        android:id="@+id/tv_descripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:text="Recuperar Contraseña"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        />
-    <TextView
-        android:id="@+id/tv_instruccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
-        android:text="Ingresa el correo electrónico institucional con el que registraste tu cuenta"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="italic"
-        />
-    <EditText
-        android:id="@+id/et_mail2"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:layout_marginTop="100dp"
-        android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris"
-        android:drawableLeft="@drawable/ic_mail"
-        android:drawablePadding="5dp"
-        android:hint="Correo Institucional"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white_clear"
-        android:textSize="15sp"
-        android:maxLines="1"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        />
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="vertical"
+        tools:context=".RecuperarActivity">
 
+        <ImageView
+            android:id="@+id/iv_back2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            app:srcCompat="@drawable/ic_back" />
 
-    <Button
-        android:id="@+id/btn_recuperar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="35dp"
-        android:backgroundTint="@color/azul"
-        android:text="Recuperar"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:layout_marginStart="35dp"
-        android:textSize="22sp"
-        />
+        <TextView
+            android:id="@+id/tv_descripcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Recuperar Contraseña"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tv_instruccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="Ingresa el correo electrónico institucional con el que registraste tu cuenta"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="italic" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/et_mail2"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="100dp"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="@color/gris"
+            android:drawableLeft="@drawable/ic_mail"
+            android:drawablePadding="5dp"
+            android:hint="Correo Institucional"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white_clear"
+            android:textSize="15sp"
+            android:maxLines="1"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp" />
+
+        <Button
+            android:id="@+id/btn_recuperar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="50dp"
+            android:backgroundTint="@color/azul"
+            android:text="Recuperar"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_marginStart="35dp"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+</ScrollView>

@@ -1,14 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Inicio" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <!-- ImageView that will take up the remaining space after the LinearLayout -->
+
+        <!-- LinearLayout containing the other elements positioned at the bottom of the screen -->
+        <ImageView
+            android:id="@+id/backgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/infoLinearLayout"
+            android:scaleType="centerCrop"
+            android:src="@drawable/buscando" />
+
+        <LinearLayout
+            android:id="@+id/infoLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/home_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:text="Name: John Doe" />
+
+            <TextView
+                android:id="@+id/home_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birthday: 01/01/1990"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/home_biography"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Biography: Lorem ipsum dolor sit amet..."
+                android:textSize="16sp"
+                android:maxLines="3"
+                android:lines="3"
+                android:scrollbars="vertical"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lottie_like"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1">
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/likeButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:lottie_rawRes="@raw/like"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Like"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lottie_dislike"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1">
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/dislikeButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:lottie_rawRes="@raw/dislike"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dislike"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>>
+</ScrollView>
