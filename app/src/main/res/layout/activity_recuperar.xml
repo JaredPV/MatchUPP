@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@drawable/fondo">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:layout_marginTop="20dp"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="Ingresa el correo electrónico institucional con el que registraste tu cuenta"
+            android:text="Para poder recuperar tu contraseña ingresa tu correo institucional con el cual te registraste"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="italic" />
@@ -51,32 +51,32 @@
             android:id="@+id/et_mail2"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="20dp"
             android:background="@android:drawable/editbox_background_normal"
-            android:backgroundTint="@color/gris"
+            android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/ic_mail"
             android:drawablePadding="5dp"
             android:hint="Correo Institucional"
             android:inputType="textEmailAddress"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white_clear"
-            android:textSize="15sp"
             android:maxLines="1"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp" />
+            android:textColor="@color/gris"
+            android:textColorHint="@color/gris"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/btn_recuperar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="50dp"
-            android:backgroundTint="@color/azul"
-            android:text="Recuperar"
+            android:backgroundTint="@color/purple_cool"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:layout_marginStart="35dp"
+            android:text="Recuperar"
             android:textSize="22sp" />
 
     </LinearLayout>

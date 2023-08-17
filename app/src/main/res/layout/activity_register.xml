@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@drawable/fondo">
 
     <LinearLayout
         android:layout_marginTop="20dp"
@@ -18,16 +18,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:text="Completa tu registro"/>
+        android:text="Crea tu cuenta con tu correo institucional"
+        android:textAlignment="center"
+        />
+
     <EditText
         android:id="@+id/et_mail_register"
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris"
+        android:backgroundTint="@color/white"
         android:drawablePadding="5dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -37,7 +40,7 @@
         android:hint="Correo Institucional"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
-        android:textColorHint="@color/white_clear"
+        android:textColorHint="@color/gris"
         android:textSize="15sp"
         android:maxLines="1"
         />
@@ -46,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris"
+        android:backgroundTint="@color/white"
         android:drawablePadding="5dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -56,7 +59,7 @@
         android:hint="Nombre"
         android:inputType="text"
         android:textColor="@color/white"
-        android:textColorHint="@color/white_clear"
+        android:textColorHint="@color/gris"
         android:textSize="15sp"
         android:maxLines="1"
         />
@@ -65,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris"
+        android:backgroundTint="@color/white"
         android:drawablePadding="5dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -75,7 +78,7 @@
         android:hint="Apellido"
         android:inputType="text"
         android:textColor="@color/white"
-        android:textColorHint="@color/white_clear"
+        android:textColorHint="@color/gris"
         android:textSize="15sp"
         android:maxLines="1"
         />
@@ -84,7 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="54dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris"
+        android:backgroundTint="@color/white"
         android:drawablePadding="5dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
@@ -94,7 +97,7 @@
         android:hint="Apodo"
         android:inputType="text"
         android:textColor="@color/white"
-        android:textColorHint="@color/white_clear"
+        android:textColorHint="@color/gris"
         android:textSize="15sp"
         android:maxLines="1"
         />
@@ -105,7 +108,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="30dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris">
+        android:backgroundTint="@color/white">
 
         <EditText
             android:id="@+id/et_pass"
@@ -114,9 +117,9 @@
             android:layout_height="match_parent"
             android:background="@android:drawable/editbox_background_normal"
             android:hint="Contraseña"
-            android:backgroundTint="@color/gris"
-            android:textColorHint="@color/white_clear"
-            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/gris"
+            android:textColor="@color/gris"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:textSize="15sp"
@@ -142,7 +145,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="30dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris">
+        android:backgroundTint="@color/white">
 
         <EditText
             android:id="@+id/et_pass_confirm"
@@ -151,8 +154,8 @@
             android:layout_height="match_parent"
             android:background="@android:drawable/editbox_background_normal"
             android:hint="Confirmar Contraseña"
-            android:backgroundTint="@color/gris"
-            android:textColorHint="@color/white_clear"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/gris"
             android:textColor="@color/white"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -177,7 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
-            android:backgroundTint="@color/azul"
+            android:backgroundTint="@color/purple_cool"
             android:text="Registrarme"
             android:textColor="@color/white"
             android:textSize="22sp"
@@ -193,9 +196,9 @@
             android:layout_height="50dp"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="50dp"
-            android:backgroundTint="@color/rosa"
+            android:backgroundTint="@android:color/transparent"
             android:text="Cancelar"
-            android:textColor="@color/white"
+            android:textColor="@color/purple_txt"
             android:textSize="22sp"
             android:textStyle="bold"
             android:paddingStart="20dp"

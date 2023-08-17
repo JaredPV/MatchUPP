@@ -77,12 +77,12 @@
                 android:id="@+id/btn_mygender_otro"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:text="Otro"
                 android:textAlignment="center"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginStart="10dp"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

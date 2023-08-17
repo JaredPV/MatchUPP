@@ -2,10 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="purple_cool">#D441FF</color>
     <color name="white_clear">#E4FFFFFF</color>
-    <color name="background">#FFBDBE</color>
+    <color name="background">#D441FF</color>
+    <color name="background_2">#C80EFF</color>
     <color name="azul">#00D5C3</color>
-    <color name="rosa">#FF9495</color>
+    <color name="purple_txt">#D441FF</color>
     <color name="gris">#D5BEB9</color>
     <color name="blue">#3949AB</color>
     <color name="red">#E53935</color>

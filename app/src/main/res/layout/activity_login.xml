@@ -5,13 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@drawable/fondo">
 
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
         android:gravity="center"
         android:orientation="vertical"
         tools:context=".LoginActivity">
@@ -31,12 +30,28 @@
         android:layout_marginTop="40dp"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:text="Inicia Sesión con tu correo institucional"
+        android:text="Match UPP"
+
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
         />
+
+        <TextView
+            android:id="@+id/tv_subtitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Creando Experiencias"
+
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            />
 
     <EditText
         android:id="@+id/et_mail"
@@ -48,14 +63,14 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="40dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris"
+        android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/ic_mail"
         android:drawablePadding="5dp"
         android:hint="Correo Institucional"
         android:maxLines="1"
         android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white_clear"
+        android:textColor="@color/gris"
+        android:textColorHint="@color/gris"
         android:textSize="15sp"
         />
     <RelativeLayout
@@ -65,7 +80,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="30dp"
         android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/gris">
+        android:backgroundTint="@color/white">
 
         <EditText
             android:id="@+id/et_pass"
@@ -76,9 +91,9 @@
             android:drawableStart="@drawable/ic_key"
             android:drawablePadding="5dp"
             android:hint="Contraseña"
-            android:backgroundTint="@color/gris"
-            android:textColorHint="@color/white_clear"
-            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/gris"
+            android:textColor="@color/gris"
             android:paddingEnd="20dp"
             android:textSize="15sp"
             android:inputType="textPassword"
@@ -108,35 +123,36 @@
         android:layout_marginEnd="35dp"
         />
 
-    <Button
-        android:id="@+id/btn_iniciar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="50dp"
-        android:backgroundTint="@color/rosa"
-        android:text="Iniciar Sesión"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_pass" />
 
+        8
 
+        <Button
+            android:id="@+id/btn_iniciar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="35dp"
+            android:backgroundTint="@color/rosa"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="Iniciar Sesión"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_pass" />
 
-    <Button
+        <Button
         android:id="@+id/btn_registrarme"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="28dp"
         android:layout_marginBottom="28dp"
-        android:backgroundTint="@color/azul"
+        android:backgroundTint="@android:color/transparent"
         android:text="Registrarme"
-        android:textColor="@color/white"
+        android:textColor="@color/purple_cool"
         android:textSize="22sp"
         android:textStyle="bold"
         android:paddingStart="20dp"
